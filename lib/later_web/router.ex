@@ -25,7 +25,7 @@ defmodule LaterWeb.Router do
 
     post "/files", FileController, :new
     put "/files/:public_token/release_on", FileController, :release_on
-    put "/files/:public_token/keep_private", FileController, :stay_private
+    put "/files/:public_token/keep_private", FileController, :keep_private
     post "/files/:public_token/info/", FileController, :info
     get "/files/:public_token", FileController, :get
     delete "/files/:public_token", FileController, :delete

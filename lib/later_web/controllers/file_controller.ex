@@ -60,7 +60,7 @@ defmodule LaterWeb.FileController do
     end
   end
 
-  def stay_private(
+  def keep_private(
         conn,
         %{"public_token" => public_token, "private_token" => private_token} = _params
       ) do
