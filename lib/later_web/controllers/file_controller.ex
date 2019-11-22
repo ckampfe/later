@@ -101,7 +101,7 @@ defmodule LaterWeb.FileController do
   end
 
   def get(conn, %{"public_token" => public_token} = _params) do
-    case Later.Files.get_file_by(%{public_token: public_token}) do
+    case Later.Files.get_public_file_by(%{public_token: public_token}) do
       %Later.File{} = file ->
         conn
         |> put_status(200)

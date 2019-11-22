@@ -23,8 +23,8 @@ defmodule Later.Files do
 
   def get_public_file_by(args) do
     LF
-    |> Repo.get_by(args)
     |> where([f], not is_nil(f.public_at))
+    |> Repo.get_by(args)
     |> Repo.preload([:scheduler_tick])
   end
 
