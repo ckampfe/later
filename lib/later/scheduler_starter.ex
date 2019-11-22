@@ -28,7 +28,9 @@ defmodule Later.SchedulerStarter do
   end
 
   def new_job(file) do
-    cron_schedule = Crontab.CronExpression.Parser.parse!(file.scheduler_tick.cron_expression)
+    cron_schedule =
+      file.scheduler_tick.cron_expression
+      |> Crontab.CronExpression.Parser.parse!()
 
     Later.FileScheduler.new_job()
     |> Quantum.Job.set_name(String.to_atom(file.public_token))
