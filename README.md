@@ -69,6 +69,21 @@ GET http://localhost:4000/files/f41b1ed00744fcd4e6d7448a1d398cb989e5fbdee4e7779c
 #   "public_token": "public_token",
 #   "uploaded_at": "2019-11-22T03:08:52.369709Z"
 # }
+
+###
+### In order to have kept the file private until the next cron activation,
+### we would have ran this:
+###
+POST http://localhost:4000/files/f41b1ed00744fcd4e6d7448a1d398cb989e5fbdee4e7779cd2d9ac8f3b563aab33d6c5401f1aba906b8dd24eaf9571e2ebedcf5b98e93c6b8b53b5f5dd0802ba/keep_private
+Content-type: application/json
+
+{
+  "private_token":"7166948b5b77f650dd5be2f6c2bc18755925293c2df1a91f60586d4bcb92d9094d96813844cdf9d1a8017adfa8a21b6b538480904019a26c8388cd14e9a27b95"
+}
+#=>
+# {
+#   "number_of_times_snoozed": 2
+# }
 ```
 
 To start your Phoenix server:
