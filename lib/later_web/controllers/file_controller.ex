@@ -93,7 +93,7 @@ defmodule LaterWeb.FileController do
 
       conn
       |> put_status(200)
-      |> json(%{"next_run_time" => next_run_time})
+      |> json(%{"next_run_time" => next_run_time, "uploaded_at" => file.inserted_at})
     else
       _ ->
         conn |> put_status(404) |> text("not found")
