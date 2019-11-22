@@ -108,7 +108,7 @@ defmodule LaterWeb.FileController do
         |> json(%{
           "hash" => file.file_hash,
           "file_location" => file.location,
-          "public_token" => "public_token",
+          "public_token" => public_token,
           "uploaded_at" => file.inserted_at
         })
 
