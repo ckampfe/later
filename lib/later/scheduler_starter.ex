@@ -32,8 +32,12 @@ defmodule Later.SchedulerStarter do
       file.scheduler_tick.cron_expression
       |> Crontab.CronExpression.Parser.parse!()
 
-    Later.FileScheduler.new_job()
-    |> Quantum.Job.set_name(String.to_atom(file.public_token))
+    job = Later.FileScheduler.new_job()
+    job_ref = job.name
+
+    Later.Files.add_job_ref!(file, job_ref)
+
+    job
     |> Quantum.Job.set_schedule(cron_schedule)
     |> Quantum.Job.set_task(fn ->
       file = Later.Files.get_file_by(%{public_token: file.public_token})
@@ -41,8 +45,7 @@ defmodule Later.SchedulerStarter do
       cond do
         is_nil(file.deleted_at) && is_nil(file.public_at) && file.public_on_next_tick ->
           Later.Files.make_public!(file)
-          Later.FileScheduler.delete_job(String.to_atom(file.public_token))
-          delete_job(file.public_token)
+          delete_job(file)
           Logger.debug("File #{file.public_token} made public.")
 
         true ->
@@ -56,7 +59,7 @@ defmodule Later.SchedulerStarter do
     |> Later.FileScheduler.add_job()
   end
 
-  def delete_job(public_token) do
-    Later.FileScheduler.delete_job(String.to_atom(public_token))
+  def delete_job(file) do
+    Later.FileScheduler.delete_job(file.job_id |> String.to_charlist() |> :erlang.list_to_ref())
   end
 end

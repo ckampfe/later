@@ -9,6 +9,7 @@ defmodule Later.Repo.Migrations.CreateFilesTable do
       add :public_token, :string, null: false
       add :public_at, :utc_datetime_usec
       add :public_on_next_tick, :boolean, null: false, default: true
+      add :job_id, :string
       add :number_of_times_snoozed, :integer, null: false, default: 0
       add :deleted_at, :utc_datetime_usec
 

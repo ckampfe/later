@@ -53,6 +53,14 @@ defmodule Later.Files do
     Later.SchedulerTicks.create(schedule_attrs)
   end
 
+  def add_job_ref!(file, job_ref) do
+    job_id = job_ref |> :erlang.ref_to_list() |> to_string()
+
+    file
+    |> LF.changeset(%{job_id: job_id})
+    |> Repo.update!()
+  end
+
   def delete!(file) do
     file
     |> LF.changeset(%{deleted_at: DateTime.utc_now()})

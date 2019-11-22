@@ -8,6 +8,7 @@ defmodule Later.File do
     field(:location, :string)
     field(:public_token, :string)
     field(:public_on_next_tick, :boolean)
+    field(:job_id, :string)
     field(:number_of_times_snoozed, :integer)
     field(:public_at, :utc_datetime_usec)
     field(:deleted_at, :utc_datetime_usec)
